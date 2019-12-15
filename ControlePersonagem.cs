@@ -13,7 +13,7 @@ public class ControlePersonagem : MonoBehaviour
 	private Vector3 limiteInferior;
 	private Vector3 limiteSuperior;
 
-	public bool canMove = true;
+	public bool podeAndar = true;
 
 	// Use this for initialization
 	void Start(){
@@ -30,22 +30,22 @@ public class ControlePersonagem : MonoBehaviour
 
 	// Update is called once per frame
 	void Update(){
-		//if (canMove){
-			rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * velocidade;
-		//}else{
-		//	theRB.velocity = Vector2.zero;
-		//}
-		//myAnim.SetFloat("moveX", theRB.velocity.x);
-		//myAnim.SetFloat("moveY", theRB.velocity.y);
-		/*
+        if (podeAndar){
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * velocidade;
+        }else{
+            rb.velocity = Vector2.zero;
+        }
+        //myAnim.SetFloat("moveX", theRB.velocity.x);
+        //myAnim.SetFloat("moveY", theRB.velocity.y);
+        /*
 		if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1){
-			if (canMove){
+			if (podeAndar){
 				myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
 				myAnim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
 			}
 		}
         */
-		transform.position = new Vector3(Mathf.Clamp(transform.position.x, limiteInferior.x, limiteSuperior.x), Mathf.Clamp(transform.position.y, limiteInferior.y, limiteSuperior.y), transform.position.z);		
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, limiteInferior.x, limiteSuperior.x), Mathf.Clamp(transform.position.y, limiteInferior.y, limiteSuperior.y), transform.position.z);		
 	}
 	
 	public void SetBounds(Vector3 baixo, Vector3 cima){

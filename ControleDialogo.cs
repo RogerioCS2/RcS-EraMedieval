@@ -24,34 +24,37 @@ public class ControleDialogo : MonoBehaviour{
                     linhaDialogoAtual++;
                     if (linhaDialogoAtual >= linhasDialogo.Length){
                         caixaDialogo.SetActive(false);
-                    }else{
-                        textoDialogo.text = linhasDialogo[linhaDialogoAtual];
+                        ControlePersonagem.instance.podeAndar = true;
+                    }
+                    else{
+                        VerificaNome();
+                        textoDialogo.text = linhasDialogo[linhaDialogoAtual];                        
                     }
                 }else {
-                    dialogoIniciadoAgora = false;
+                    dialogoIniciadoAgora = false;                   
                 }                   
             }
-        }
-           
+        }           
     }    
     
     public void AtivadorDialogo(string[] novaLinha, bool umaPessoa) {
-        linhasDialogo = novaLinha;
-        linhaDialogoAtual = 0;        
-        textoDialogo.text = linhasDialogo[0];
+        linhasDialogo = novaLinha;        
+        linhaDialogoAtual = 0;
+        VerificaNome();
+        textoDialogo.text = linhasDialogo[linhaDialogoAtual];
         caixaDialogo.SetActive(true);
         dialogoIniciadoAgora = true;
-        caixaNome.SetActive(umaPessoa);       
+        caixaNome.SetActive(umaPessoa);
+        ControlePersonagem.instance.podeAndar = false;
     }
     
-    /*
-    public void CheckIfName(){
-        if (dialogLines[currentLine].StartsWith("n-")){
-            nameText.text = dialogLines[currentLine].Replace("n-", "");
-            currentLine++;
+    
+    public void VerificaNome(){
+        if (linhasDialogo[linhaDialogoAtual].StartsWith("n-")){
+            textoNome.text = linhasDialogo[linhaDialogoAtual].Replace("n-", "");
+            linhaDialogoAtual++;
         }
-    }
-    */
+    }    
 
     /*
     public void ShouldActivateQuestEnd(string questName, bool markComplete){
