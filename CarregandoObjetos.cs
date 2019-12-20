@@ -7,7 +7,8 @@ public class CarregandoObjetos : MonoBehaviour{
     public GameObject eduard;
     public GameObject rosaly;
     public GameObject robert;
-    //public GameObject gameMan;
+    public GameObject gameManager;
+    private float esperar = 10f;
     //public GameObject audioMan;
     //public GameObject battleMan;    
 
@@ -16,27 +17,16 @@ public class CarregandoObjetos : MonoBehaviour{
             CarregarCena.instance = Instantiate(canvas).GetComponent<CarregarCena>();
         }
 
-        CarregandoPersonagens();
-
-        /*
         if (GameManager.instance == null){
-            GameManager.instance = Instantiate(gameMan).GetComponent<GameManager>();
+            Instantiate(gameManager);
         }
 
-        if (AudioManager.instance == null){
-            AudioManager.instance = Instantiate(audioMan).GetComponent<AudioManager>();
-        }
-
-        if (BattleManager.instance == null){
-            BattleManager.instance = Instantiate(battleMan).GetComponent<BattleManager>();
-        }
-        */
+        CarregandoPersonagens();
     }
 
-    void Update()
-    {
+    void Update(){
         
-    }
+    }    
 
     public void CarregandoPersonagens(){
         if (ControlePersonagem.instance == null){

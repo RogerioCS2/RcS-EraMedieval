@@ -3,61 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusPersonagens : MonoBehaviour{
-    public string charName;
-    public int playerLevel = 1;
-    public int currentEXP;
-    public int[] expToNextLevel;
-    public int maxLevel = 100;
-    public int baseEXP = 1000;
-
-    public int currentHP;
-    public int maxHP = 100;
-    public int currentMP;
-    public int maxMP = 30;
-    public int[] mpLvlBonus;
-    public int strength;
-    public int defence;
-    public int wpnPwr;
-    public int armrPwr;
-    public string equippedWpn;
-    public string equippedArmr;
-    public Sprite charIamge;
+    public string nomePersonagem;
+    public int personagemLevel = 1;
+    public int experienciaAtual;
+    public int[] experienciaProximoLevel;
+    public int levelMaximo = 100;
+    public int experienciaBase = 30;
+    public int hpAtual;
+    public int hpMaximo = 30;
+    public int mpAtual;
+    public int mpMaximo = 30;
+    public int[] mpLevelBonus;
+    public int forca;
+    public int defesa;
+    public int forcaArma;
+    public int forcaArmadura;
+    public string armaEquipada;
+    public string armaduraEquipada;
+    public Sprite imagemPersonagem;
    
     void Start(){
-        expToNextLevel = new int[maxLevel];
-        expToNextLevel[1] = baseEXP;
-        for (int i = 2; i < expToNextLevel.Length; i++){
-            expToNextLevel[i] = Mathf.FloorToInt(expToNextLevel[i - 1] * 1.05f);
+        experienciaProximoLevel = new int[levelMaximo];
+        experienciaProximoLevel[1] = experienciaBase;
+        for (int i = 2; i < experienciaProximoLevel.Length; i++){
+            experienciaProximoLevel[i] = Mathf.FloorToInt(experienciaProximoLevel[i - 1] * 1.05f);
         }
     }
   
-    void Update(){
+    void Update(){        
         if (Input.GetKeyDown(KeyCode.K)){
             AddExp(1000);
-        }
+        }        
     }
-
+        
     public void AddExp(int expToAdd){
-        currentEXP += expToAdd;
-        if (playerLevel < maxLevel){
-            if (currentEXP > expToNextLevel[playerLevel]){
-                currentEXP -= expToNextLevel[playerLevel];
-                playerLevel++;
-                if (playerLevel % 2 == 0)                {
-                    strength++;
+        experienciaAtual += expToAdd;
+        if (personagemLevel < levelMaximo){
+            if (experienciaAtual > experienciaProximoLevel[personagemLevel]){
+                experienciaAtual -= experienciaProximoLevel[personagemLevel];
+                personagemLevel++;
+                if (personagemLevel % 2 == 0)                {
+                    forca++;
                 }else{
-                    defence++;
+                    defesa++;
                 }
-                maxHP = Mathf.FloorToInt(maxHP * 1.05f);
-                currentHP = maxHP;
-                maxMP += mpLvlBonus[playerLevel];
-                currentMP = maxMP;
+                hpMaximo = Mathf.FloorToInt(hpMaximo * 1.05f);
+                hpAtual = hpMaximo;
+                mpMaximo += mpLevelBonus[personagemLevel];
+                mpAtual = mpMaximo;
             }
         }
 
-        if (playerLevel >= maxLevel){
-            currentEXP = 0;
+        if (personagemLevel >= levelMaximo){
+            experienciaAtual = 0;
         }
-    }
+    }    
 }
 
