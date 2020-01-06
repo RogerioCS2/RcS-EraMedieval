@@ -27,11 +27,11 @@ public class Saida : MonoBehaviour{
 	}
 
     private void OnTriggerEnter2D(Collider2D other){
-        if(other.tag == "Player"){           
+        if (other.tag == "Player") {
             shouldLoadAfterFade = true;
-           // GameManager.instance.fadingBetweenAreas = true;
-           CarregarCena.instance.EscurecerTela();
-           ControlePersonagem.instance.areaTransitionName = areaTransitionName;
+            //GameManager.instance.fadingBetweenAreas = true;
+            CarregarCena.instance.EscurecerTela();
+            ControlePersonagem.instance.areaTransitionName = areaTransitionName;
         }
     }
 }

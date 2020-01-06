@@ -9,17 +9,15 @@ public class CarregandoObjetos : MonoBehaviour{
     public GameObject robert;
     public GameObject gameManager;
     private float esperar = 10f;
-    //public GameObject audioMan;
-    //public GameObject battleMan;    
 
     void Start(){
-        if (CarregarCena.instance == null){
-            CarregarCena.instance = Instantiate(canvas).GetComponent<CarregarCena>();
-        }
-
-        if (GameManager.instance == null){
+        if (GameManager.instance == null) {
             Instantiate(gameManager);
         }
+
+        if (CarregarCena.instance == null){
+            CarregarCena.instance = Instantiate(canvas).GetComponent<CarregarCena>();
+        }       
 
         CarregandoPersonagens();
     }
@@ -33,7 +31,7 @@ public class CarregandoObjetos : MonoBehaviour{
             ControlePersonagem clone = Instantiate(eduard).GetComponent<ControlePersonagem>();
             ControlePersonagem.instance = clone;
         }
-
+        
         if (MovimentoPrincesa.instance == null){
             MovimentoPrincesa clone = Instantiate(rosaly).GetComponent<MovimentoPrincesa>();
             MovimentoPrincesa.instance = clone;
@@ -42,6 +40,6 @@ public class CarregandoObjetos : MonoBehaviour{
         if (MovimentoMago.instance == null){
             MovimentoMago clone = Instantiate(robert).GetComponent<MovimentoMago>();
             MovimentoMago.instance = clone;
-        }
+        }        
     }
 }

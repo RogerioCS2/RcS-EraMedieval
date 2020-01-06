@@ -12,7 +12,7 @@ public class Entrada : MonoBehaviour{
             MovimentoPrincesa.instance.transform.position = transform.position;
         }
         carregarCena.ClarearTela();
-        CarregarCena.instance.ClarearTela();  
+        //CarregarCena.instance.ClarearTela();
         //GameManager.instance.fadingBetweenAreas = false;
     }
 

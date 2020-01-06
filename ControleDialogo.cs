@@ -19,14 +19,15 @@ public class ControleDialogo : MonoBehaviour{
        
     void Update(){
         if (caixaDialogo.activeInHierarchy){
-            if (Input.GetButtonUp("Fire1")){
+            GameManager.instance.dialogoEstaAtivo = true;
+            if (Input.GetButtonUp("Fire1")){               
                 if (!dialogoIniciadoAgora){
-                    linhaDialogoAtual++;
+                    linhaDialogoAtual++;                    
                     if (linhaDialogoAtual >= linhasDialogo.Length){
                         caixaDialogo.SetActive(false);
-                        ControlePersonagem.instance.podeAndar = true;
-                    }
-                    else{
+                        GameManager.instance.dialogoEstaAtivo = false;
+                        AtivandoRosaly();
+                    } else{
                         VerificaNome();
                         textoDialogo.text = linhasDialogo[linhaDialogoAtual];                        
                     }
@@ -46,6 +47,7 @@ public class ControleDialogo : MonoBehaviour{
         dialogoIniciadoAgora = true;
         caixaNome.SetActive(umaPessoa);
         ControlePersonagem.instance.podeAndar = false;
+        Debug.Log("Para Seu demonho");
     }
     
     
@@ -54,7 +56,12 @@ public class ControleDialogo : MonoBehaviour{
             textoNome.text = linhasDialogo[linhaDialogoAtual].Replace("n-", "");
             linhaDialogoAtual++;
         }
-    }    
+    }
+
+    public void AtivandoRosaly() {
+        MovimentoPrincesa.instance.AtivandoImagemRosaly();
+        GameManager.instance.ativandoMenuRosaly();
+    }
 
     /*
     public void ShouldActivateQuestEnd(string questName, bool markComplete){

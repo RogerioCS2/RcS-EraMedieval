@@ -43,7 +43,7 @@ public class CarregarCena : MonoBehaviour{
         telaClara = false;
     }
 
-    public void ClarearTela(){
+    public void ClarearTela(){      
         telaEscura = false;
         telaClara = true;
     }    

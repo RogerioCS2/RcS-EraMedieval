@@ -7,7 +7,8 @@ public class MovimentoPrincesa : MonoBehaviour {
 	public Rigidbody2D rb;
 	public static MovimentoPrincesa instance;
     private ControlePersonagem personagem;
-   
+    public GameObject imagemTela;
+
     void Start (){
         personagem = FindObjectOfType(typeof(ControlePersonagem)) as ControlePersonagem;
         if (instance == null){
@@ -35,4 +36,8 @@ public class MovimentoPrincesa : MonoBehaviour {
 			velocidade = 4.5f;
 		}
 	}
+
+    public void AtivandoImagemRosaly(){
+        imagemTela.SetActive(true);
+    }
 }

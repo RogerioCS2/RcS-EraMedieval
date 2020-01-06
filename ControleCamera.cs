@@ -27,8 +27,8 @@ public class ControleCamera : MonoBehaviour {
 	}
 
 	void LateUpdate(){        
-       if (alvo == null){
-            Debug.Log("Perdeu a referência");
+       if (alvo == null){          
+            //transform.position = (ControlePersonagem.instance.transform.position);
        }else {
             transform.position = new Vector3(alvo.position.x, alvo.position.y, transform.position.z);
        }

@@ -7,6 +7,7 @@ public class MovimentoMago : MonoBehaviour {
 	public Rigidbody2D rb;
 	public static MovimentoMago instance;
     private ControlePersonagem personagem;
+    public GameObject imagemTela;
 
     void Start (){
         personagem = FindObjectOfType(typeof(ControlePersonagem)) as ControlePersonagem;
@@ -35,4 +36,8 @@ public class MovimentoMago : MonoBehaviour {
 			velocidade = 4.5f;
 		}
 	}
+
+    public void AtivarRobert() {
+        imagemTela.SetActive(true);
+    }
 }
