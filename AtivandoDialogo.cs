@@ -12,8 +12,7 @@ public class AtivandoDialogo : MonoBehaviour
 
     }
 
-    void Update()
-    {
+    void Update(){
         if (dialogoAtivo && Input.GetButtonDown("Fire1") && !ControleDialogo.instance.caixaDialogo.activeInHierarchy)
         {
             ControleDialogo.instance.AtivadorDialogo(linhas, umaPessoa);            
@@ -26,8 +25,7 @@ public class AtivandoDialogo : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D objColisao)
-    {
+    private void OnTriggerExit2D(Collider2D objColisao){
         if (objColisao.tag == "Player"){
             dialogoAtivo = false;
         }
