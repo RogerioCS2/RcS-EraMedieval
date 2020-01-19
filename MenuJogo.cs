@@ -14,11 +14,11 @@ public class MenuJogo : MonoBehaviour {
     public Image[] imagemPersonagem;
   
     public GameObject[] pseronagenCaracteristicas;
-    public GameObject[] statusButtons;
-    /*
-  public Text statusName, statusHP, statusMP, statusStr, statusDef, statusWpnEqpd, statusWpnPwr, statusArmrEqpd, statusArmrPwr, statusExp;
-  public Image statusImage;
-  */
+    public GameObject[] botoesDeStatus;
+  
+    public Text nomePersonagem, situacaoHP, situacaoMP, situacaoForca, sutuacaoDefesa, situacaoArmaEquipada, sitacaoForcaArma, situacaoArmaduraEquipada, situacaoForcaArmadura, situacaoExp;
+    public Image situacaoImagem;
+  
     //public ItemButton[] itemButtons;
     //public string selectedItem;
     //public Item activeItem;
@@ -74,7 +74,7 @@ public class MenuJogo : MonoBehaviour {
     }   
   
     public void AlterandoJoanelasMenu(int numeroJanela){
-        //UpdateMainStats();
+        //AtualizandoStatus();
         for (int i = 0; i < janelas.Length; i++){
             if (i == numeroJanela){
                 janelas[i].SetActive(!janelas[i].activeInHierarchy);
@@ -97,36 +97,34 @@ public class MenuJogo : MonoBehaviour {
     public void AbrindoStatusPersonagens(){
         AtualizandoStatus();
         //update the information that is shown
-        //StatusChar(0);
-        for (int i = 0; i < statusButtons.Length; i++) {
-            statusButtons[i].SetActive(situacaoPersonagem[i].gameObject.activeInHierarchy);
-            statusButtons[i].GetComponentInChildren<Text>().text = situacaoPersonagem[i].nomePersonagem;
+        SituacaoAtualPersonagem(0);
+        for (int i = 0; i < botoesDeStatus.Length; i++) {
+            botoesDeStatus[i].SetActive(situacaoPersonagem[i].gameObject.activeInHierarchy);
+            botoesDeStatus[i].GetComponentInChildren<Text>().text = situacaoPersonagem[i].nomePersonagem;
         }
     }
     
-    /*
-    public void StatusChar(int selected)
-    {
-        statusName.text = playerStats[selected].charName;
-        statusHP.text = "" + playerStats[selected].currentHP + "/" + playerStats[selected].maxHP;
-        statusMP.text = "" + playerStats[selected].currentMP + "/" + playerStats[selected].maxMP;
-        statusStr.text = playerStats[selected].strength.ToString();
-        statusDef.text = playerStats[selected].defence.ToString();
-        if (playerStats[selected].equippedWpn != "")
+    ///*
+    public void SituacaoAtualPersonagem(int perosnagemSelecionado){        
+        nomePersonagem.text = situacaoPersonagem[perosnagemSelecionado].nomePersonagem;
+        situacaoHP.text = "" + situacaoPersonagem[perosnagemSelecionado].hpAtual + "/" + situacaoPersonagem[perosnagemSelecionado].hpMaximo;
+        situacaoMP.text = "" + situacaoPersonagem[perosnagemSelecionado].mpAtual + "/" + situacaoPersonagem[perosnagemSelecionado].mpMaximo;
+        situacaoForca.text = situacaoPersonagem[perosnagemSelecionado].forca.ToString();
+        sutuacaoDefesa.text = situacaoPersonagem[perosnagemSelecionado].defesa.ToString();
+        if (situacaoPersonagem[perosnagemSelecionado].armaEquipada != "")
         {
-            statusWpnEqpd.text = playerStats[selected].equippedWpn;
+            situacaoArmaEquipada.text = situacaoPersonagem[perosnagemSelecionado].armaEquipada;
         }
-        statusWpnPwr.text = playerStats[selected].wpnPwr.ToString();
-        if (playerStats[selected].equippedArmr != "")
+        sitacaoForcaArma.text = situacaoPersonagem[perosnagemSelecionado].forcaArma.ToString();
+        if (situacaoPersonagem[perosnagemSelecionado].armaduraEquipada != "")
         {
-            statusArmrEqpd.text = playerStats[selected].equippedArmr;
+            situacaoArmaduraEquipada.text = situacaoPersonagem[perosnagemSelecionado].armaduraEquipada;
         }
-        statusArmrPwr.text = playerStats[selected].armrPwr.ToString();
-        statusExp.text = (playerStats[selected].expToNextLevel[playerStats[selected].playerLevel] - playerStats[selected].currentEXP).ToString();
-        statusImage.sprite = playerStats[selected].charIamge;
-
+        situacaoForcaArmadura.text = situacaoPersonagem[perosnagemSelecionado].forcaArmadura.ToString();
+        situacaoExp.text = (situacaoPersonagem[perosnagemSelecionado].experienciaProximoLevel[situacaoPersonagem[perosnagemSelecionado].personagemLevel] - situacaoPersonagem[perosnagemSelecionado].experienciaAtual).ToString();
+        situacaoImagem.sprite = situacaoPersonagem[perosnagemSelecionado].imagemPersonagem;
     }
-    */
+    //*/
     /*
     public void ShowItems()
     {
