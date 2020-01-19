@@ -12,7 +12,8 @@ public class MenuJogo : MonoBehaviour {
     public Text[] nomeTexto, hpTexto, mpTexto, lvlTexto, expTexto;
     public Slider[] expSlider;
     public Image[] imagemPersonagem;
-  
+    public Image imagemBotaoP1, imagemBotaoP2, imagemBotaoP3, imagemBotaoP5;
+
     public GameObject[] pseronagenCaracteristicas;
     public GameObject[] botoesDeStatus;
   
@@ -46,14 +47,12 @@ public class MenuJogo : MonoBehaviour {
                 AtualizandoStatus();
                 GameManager.instance.menuEstaAberto = true;
             }
-
             //AudioManager.instance.PlaySFX(5);
         }        
     }
     
     public void AtualizandoStatus(){
         situacaoPersonagem = GameManager.instance.playerStats;
-
         for (int i = 0; i < situacaoPersonagem.Length; i++) {
             if (situacaoPersonagem[i].gameObject.activeInHierarchy) {
                 pseronagenCaracteristicas[i].SetActive(true);                
@@ -69,7 +68,6 @@ public class MenuJogo : MonoBehaviour {
                 pseronagenCaracteristicas[i].SetActive(false);
             }
         }
-
         //goldText.text = GameManager.instance.currentGold.ToString() + "g";
     }   
   
@@ -102,29 +100,46 @@ public class MenuJogo : MonoBehaviour {
             botoesDeStatus[i].SetActive(situacaoPersonagem[i].gameObject.activeInHierarchy);
             botoesDeStatus[i].GetComponentInChildren<Text>().text = situacaoPersonagem[i].nomePersonagem;
         }
-    }
+    }    
     
-    ///*
     public void SituacaoAtualPersonagem(int perosnagemSelecionado){        
         nomePersonagem.text = situacaoPersonagem[perosnagemSelecionado].nomePersonagem;
         situacaoHP.text = "" + situacaoPersonagem[perosnagemSelecionado].hpAtual + "/" + situacaoPersonagem[perosnagemSelecionado].hpMaximo;
         situacaoMP.text = "" + situacaoPersonagem[perosnagemSelecionado].mpAtual + "/" + situacaoPersonagem[perosnagemSelecionado].mpMaximo;
         situacaoForca.text = situacaoPersonagem[perosnagemSelecionado].forca.ToString();
         sutuacaoDefesa.text = situacaoPersonagem[perosnagemSelecionado].defesa.ToString();
-        if (situacaoPersonagem[perosnagemSelecionado].armaEquipada != "")
-        {
+        if (situacaoPersonagem[perosnagemSelecionado].armaEquipada != ""){
             situacaoArmaEquipada.text = situacaoPersonagem[perosnagemSelecionado].armaEquipada;
         }
         sitacaoForcaArma.text = situacaoPersonagem[perosnagemSelecionado].forcaArma.ToString();
-        if (situacaoPersonagem[perosnagemSelecionado].armaduraEquipada != "")
-        {
+        if (situacaoPersonagem[perosnagemSelecionado].armaduraEquipada != ""){
             situacaoArmaduraEquipada.text = situacaoPersonagem[perosnagemSelecionado].armaduraEquipada;
         }
         situacaoForcaArmadura.text = situacaoPersonagem[perosnagemSelecionado].forcaArmadura.ToString();
         situacaoExp.text = (situacaoPersonagem[perosnagemSelecionado].experienciaProximoLevel[situacaoPersonagem[perosnagemSelecionado].personagemLevel] - situacaoPersonagem[perosnagemSelecionado].experienciaAtual).ToString();
         situacaoImagem.sprite = situacaoPersonagem[perosnagemSelecionado].imagemPersonagem;
     }
-    //*/
+
+    public void CorBotaoP1() {
+        imagemBotaoP1.color = new Color(imagemBotaoP1.color.r, imagemBotaoP1.color.g, imagemBotaoP1.color.b,
+                                 Mathf.MoveTowards(imagemBotaoP1.color.a, 0f, 1f));
+        imagemBotaoP2.color = new Color(imagemBotaoP2.color.r, imagemBotaoP2.color.g, imagemBotaoP2.color.b,
+                                Mathf.MoveTowards(imagemBotaoP2.color.a, 0.989f, 1f));
+        imagemBotaoP3.color = new Color(imagemBotaoP3.color.r, imagemBotaoP3.color.g, imagemBotaoP3.color.b,
+                                Mathf.MoveTowards(imagemBotaoP3.color.a, 0.989f, 1f));
+    }
+
+    public void CorBotaoP2(){
+        imagemBotaoP2.color = new Color(imagemBotaoP2.color.r, imagemBotaoP2.color.g, imagemBotaoP2.color.b,
+                                 Mathf.MoveTowards(imagemBotaoP2.color.a, 0f, 1f));
+        imagemBotaoP3.color = new Color(imagemBotaoP3.color.r, imagemBotaoP3.color.g, imagemBotaoP3.color.b,
+                                Mathf.MoveTowards(imagemBotaoP3.color.a, 0.989f, 1f));
+        imagemBotaoP1.color = new Color(imagemBotaoP1.color.r, imagemBotaoP1.color.g, imagemBotaoP1.color.b,
+                                Mathf.MoveTowards(imagemBotaoP1.color.a, 0.989f, 1f));
+        imagemBotaoP5.color = new Color(imagemBotaoP5.color.r, imagemBotaoP5.color.g, imagemBotaoP5.color.b,
+                                 Mathf.MoveTowards(imagemBotaoP5.color.a, 0f, 1f));
+    }
+
     /*
     public void ShowItems()
     {
@@ -167,15 +182,15 @@ public class MenuJogo : MonoBehaviour {
         itemDescription.text = activeItem.description;
     }
     */
-   /*
-    public void DiscardItem()
-    {
-        if (activeItem != null)
-        {
-            GameManager.instance.RemoveItem(activeItem.itemName);
-        }
-    }
-   */
+    /*
+     public void DiscardItem()
+     {
+         if (activeItem != null)
+         {
+             GameManager.instance.RemoveItem(activeItem.itemName);
+         }
+     }
+    */
     /*
     public void OpenItemCharChoice()
     {
