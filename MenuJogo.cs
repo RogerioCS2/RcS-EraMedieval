@@ -19,6 +19,8 @@ public class MenuJogo : MonoBehaviour {
   
     public Text nomePersonagem, situacaoHP, situacaoMP, situacaoForca, sutuacaoDefesa, situacaoArmaEquipada, sitacaoForcaArma, situacaoArmaduraEquipada, situacaoForcaArmadura, situacaoExp;
     public Image situacaoImagem;
+
+    public BotaoItem[] botaoItem;
   
     //public ItemButton[] itemButtons;
     //public string selectedItem;
@@ -72,7 +74,7 @@ public class MenuJogo : MonoBehaviour {
     }   
   
     public void AlterandoJoanelasMenu(int numeroJanela){
-        //AtualizandoStatus();
+        AtualizandoStatus();
         for (int i = 0; i < janelas.Length; i++){
             if (i == numeroJanela){
                 janelas[i].SetActive(!janelas[i].activeInHierarchy);
@@ -138,6 +140,20 @@ public class MenuJogo : MonoBehaviour {
                                 Mathf.MoveTowards(imagemBotaoP1.color.a, 0.989f, 1f));
         imagemBotaoP5.color = new Color(imagemBotaoP5.color.r, imagemBotaoP5.color.g, imagemBotaoP5.color.b,
                                  Mathf.MoveTowards(imagemBotaoP5.color.a, 0f, 1f));
+    }
+
+    public void ExibirItens() {
+        for (int i = 0; i < botaoItem.Length; i++) {
+            botaoItem[i].botao = i;
+            if (GameManager.instance.itensAdquiridos[i] != ""){
+                botaoItem[i].imagemBotao.gameObject.SetActive(true);
+                botaoItem[i].imagemBotao.sprite = GameManager.instance.CarregandoItens(GameManager.instance.itensAdquiridos[i]).itemSprite;
+                botaoItem[i].quantitativoTexto.text = GameManager.instance.numeroItens[i].ToString();
+            } else {
+                botaoItem[i].imagemBotao.gameObject.SetActive(false);
+                botaoItem[i].quantitativoTexto.text = "";
+            }
+        }
     }
 
     /*

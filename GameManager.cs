@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour{
+public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public StatusPersonagens[] playerStats;
     public bool menuEstaAberto, dialogoEstaAtivo, telaEstaEscura/*, shopActive, battleActive*/;
     public string[] itensAdquiridos;
     public int[] numeroItens;
     public Item[] referenciaItens;
-      
-    void Start(){
+
+    void Start() {
         instance = this;
-        DontDestroyOnLoad(gameObject);        
+        DontDestroyOnLoad(gameObject);
     }
 
-    void Update(){
+    void Update() {
         if (menuEstaAberto || dialogoEstaAtivo || telaEstaEscura)
         {
             ControlePersonagem.instance.podeAndar = false;
-        }  else {
+        } else {
             ControlePersonagem.instance.podeAndar = true;
         }
     }
@@ -30,8 +30,17 @@ public class GameManager : MonoBehaviour{
         }
     }
     public void AtivandoMenuRobert() {
-        for (int i = 0; i < playerStats.Length; i++)        {
+        for (int i = 0; i < playerStats.Length; i++) {
             playerStats[2].gameObject.SetActive(true);
         }
-    }    
+    }
+
+    public Item CarregandoItens (string itens){
+        for (int i = 0; i< itensAdquiridos.Length; i++) {
+            if (referenciaItens[i].itemName == itens) {
+                return referenciaItens[i];
+            }            
+        }
+        return null;
+    }
 }
