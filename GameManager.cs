@@ -33,14 +33,5 @@ public class GameManager : MonoBehaviour{
         for (int i = 0; i < playerStats.Length; i++)        {
             playerStats[2].gameObject.SetActive(true);
         }
-    }
-
-    public Item BuscarDetalhesItens(string detalhesItem) {
-        for (int i = 0; i < referenciaItens.Length; i++) {
-            if (referenciaItens[i].itemNome == detalhesItem) {
-                return referenciaItens[i];
-            }
-        }
-        return null;                
-    }
+    }    
 }
