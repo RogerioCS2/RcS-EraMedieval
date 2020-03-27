@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuJogo : MonoBehaviour {  
-
+public class MenuJogo : MonoBehaviour {   
     public GameObject menuJogo;
     public GameObject[] janelas;
     private StatusPersonagens[] situacaoPersonagem;
@@ -20,12 +19,12 @@ public class MenuJogo : MonoBehaviour {
     public Text nomePersonagem, situacaoHP, situacaoMP, situacaoForca, sutuacaoDefesa, situacaoArmaEquipada, sitacaoForcaArma, situacaoArmaduraEquipada, situacaoForcaArmadura, situacaoExp;
     public Image situacaoImagem;
 
-    public BotaoItem[] botaoItem;
-  
-    //public ItemButton[] itemButtons;
-    //public string selectedItem;
-    //public Item activeItem;
-    // public Text itemName, itemDescription, useButtonText;
+    public BotaoItem[] botaoItem;     
+    public string selecionaItem;
+    public Item ativaItem;
+    public Text itemNome, itemDescricao, useBotaoTexto;
+
+    public static MenuJogo instance;
 
     public GameObject itemMenuPersonagem;
     //public Text[] itemCharChoiceNames;
@@ -34,9 +33,8 @@ public class MenuJogo : MonoBehaviour {
     //public string mainMenuName;
 
     // Use this for initialization
-    void Start()
-    {
-        //instance = this;
+    void Start(){       
+        instance = this;
     }
 
     // Update is called once per frame
@@ -143,6 +141,8 @@ public class MenuJogo : MonoBehaviour {
     }
 
     public void ExibirItens() {
+        GameManager.instance.OrganizarItens();
+        
         for (int i = 0; i < botaoItem.Length; i++) {
             botaoItem[i].botao = i;
             if (GameManager.instance.itensAdquiridos[i] != ""){
@@ -156,29 +156,33 @@ public class MenuJogo : MonoBehaviour {
         }
     }
 
-    /*
-    public void ShowItems()
-    {
-        GameManager.instance.SortItems();
-
-        for (int i = 0; i < itemButtons.Length; i++)
-        {
-            itemButtons[i].buttonValue = i;
-
-            if (GameManager.instance.itemsHeld[i] != "")
-            {
-                itemButtons[i].buttonImage.gameObject.SetActive(true);
-                itemButtons[i].buttonImage.sprite = GameManager.instance.GetItemDetails(GameManager.instance.itemsHeld[i]).itemSprite;
-                itemButtons[i].amountText.text = GameManager.instance.numberOfItems[i].ToString();
-            }
-            else
-            {
-                itemButtons[i].buttonImage.gameObject.SetActive(false);
-                itemButtons[i].amountText.text = "";
-            }
+    public void SelecionaItem(Item novoItem) {
+        ativaItem = novoItem;
+        if (ativaItem.isItem) {
+            useBotaoTexto.text = "Usar";
         }
+        if (ativaItem.isWeapon || ativaItem.isArmour){
+            useBotaoTexto.text = "Equipar";
+        }
+        itemNome.text = ativaItem.itemName;
+        itemDescricao.text = ativaItem.description;
     }
-    */
+
+    public void UsarItem() {
+        for (int i = 0; i < botaoItem.Length; i++) {
+            Debug.Log(botaoItem[i]);
+
+            if (botaoItem[i].imagemBotao != true){
+                
+                itemNome.text = "Item Indisponível";
+                itemDescricao.text = "";
+            }else {
+               
+            }
+        }     
+    }
+
+    
     /*
     public void SelectItem(Item newItem)
     {

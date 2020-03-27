@@ -19,4 +19,10 @@ public class BotaoItem : MonoBehaviour{
     {
         
     }
+
+    public void Pressionar() {
+        if (GameManager.instance.itensAdquiridos[botao] != "") {
+            MenuJogo.instance.SelecionaItem(GameManager.instance.CarregandoItens(GameManager.instance.itensAdquiridos[botao]));
+        }
+    }
 }
