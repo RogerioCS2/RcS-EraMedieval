@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
     public StatusPersonagens[] playerStats;
     public bool menuEstaAberto, dialogoEstaAtivo, telaEstaEscura;
     public string[] itensAdquiridos;
-    public int[] numeroItens;
+    public int[] quantidadeItens;
     public Item[] referenciaItens;
 
     void Start() {
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
             ControlePersonagem.instance.podeAndar = true;
         }        
         /*
-        TESTANDO METODO REMOVER E ADICIONAR
+        //TESTANDO METODO REMOVER E ADICIONAR
         
         if (Input.GetKeyDown(KeyCode.J)){
             AdicionaItemInventario("Oi Sogra");           
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
             RemoveItemInventario("Oi Sogra");            
         }
         */
+        
     }
 
     public void ativandoMenuRosaly() {
@@ -63,8 +64,8 @@ public class GameManager : MonoBehaviour {
                 if (itensAdquiridos[i] == "") {
                     itensAdquiridos[i] = itensAdquiridos[i + 1];
                     itensAdquiridos[i + 1] = "";
-                    numeroItens[i] = numeroItens[i + 1];
-                    numeroItens[i + 1] = 0;
+                    quantidadeItens[i] = quantidadeItens[i + 1];
+                    quantidadeItens[i + 1] = 0;
                     if (itensAdquiridos[i] != "") {
                         irProximoEspaco = true;
                     }
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour {
             }
             if (existeItem){
                 itensAdquiridos[novaPosicaoItem] = itemAdicionado;
-                numeroItens[novaPosicaoItem]++;
+                quantidadeItens[novaPosicaoItem]++;
             }else {
                 Debug.LogError(itemAdicionado + " O Item Adicionado Não Existe!");
             }
@@ -113,8 +114,8 @@ public class GameManager : MonoBehaviour {
             }
         }
         if (estaVazio){
-            numeroItens[posicaoItem]--;
-            if (numeroItens[posicaoItem] <= 0) {
+            quantidadeItens[posicaoItem]--;
+            if (quantidadeItens[posicaoItem] <= 0) {
                 itensAdquiridos[posicaoItem] = "";
             }
             MenuJogo.instance.ExibirItens();

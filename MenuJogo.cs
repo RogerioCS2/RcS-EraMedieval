@@ -19,6 +19,7 @@ public class MenuJogo : MonoBehaviour {
     public Text nomePersonagem, situacaoHP, situacaoMP, situacaoForca, sutuacaoDefesa, situacaoArmaEquipada, sitacaoForcaArma, situacaoArmaduraEquipada, situacaoForcaArmadura, situacaoExp;
     public Image situacaoImagem;
 
+    [Header ("Informações Itens")]
     public BotaoItem[] botaoItem;     
     public string selecionaItem;
     public Item ativaItem;
@@ -27,7 +28,7 @@ public class MenuJogo : MonoBehaviour {
     public static MenuJogo instance;
 
     public GameObject itemMenuPersonagem;
-    //public Text[] itemCharChoiceNames;
+    public Text[] itemMenuPersonagemNome;   
     //public static MenuJogo instance;
     //public Text ouroTexto;
     //public string mainMenuName;
@@ -80,7 +81,7 @@ public class MenuJogo : MonoBehaviour {
                 janelas[i].SetActive(false);
             }
         }
-        //itemMenuPersonagem.SetActitemCharChoiceMenuive(false);
+        //itemMenuPersonagem.SetActive(false);
     }  
     
     public void FecharMenu(){
@@ -148,7 +149,7 @@ public class MenuJogo : MonoBehaviour {
             if (GameManager.instance.itensAdquiridos[i] != ""){
                 botaoItem[i].imagemBotao.gameObject.SetActive(true);
                 botaoItem[i].imagemBotao.sprite = GameManager.instance.CarregandoItens(GameManager.instance.itensAdquiridos[i]).itemSprite;
-                botaoItem[i].quantitativoTexto.text = GameManager.instance.numeroItens[i].ToString();
+                botaoItem[i].quantitativoTexto.text = GameManager.instance.quantidadeItens[i].ToString();
             } else {
                 botaoItem[i].imagemBotao.gameObject.SetActive(false);
                 botaoItem[i].quantitativoTexto.text = "";
@@ -168,49 +169,40 @@ public class MenuJogo : MonoBehaviour {
         itemDescricao.text = ativaItem.description;
     }
 
-    public void UsarItem() {
-        for (int i = 0; i < botaoItem.Length; i++) {
-            Debug.Log(botaoItem[i]);
-
-            if (botaoItem[i].imagemBotao != true){
-                
-                itemNome.text = "Item Indisponível";
-                itemDescricao.text = "";
-            }else {
-               
-            }
-        }     
+    public void DescartarItem(){
+        if (ativaItem != null){
+            GameManager.instance.RemoveItemInventario(ativaItem.itemName); 
+            ativaItem = null;                                
+        }else {
+            itemNome.text = "Item Indisponível";
+            itemDescricao.text = "";
+        }
     }
 
-    
-    /*
-    public void SelectItem(Item newItem)
-    {
-        activeItem = newItem;
+    public void AbrindoPersonagemItem(){
+        itemMenuPersonagem.SetActive(true);
 
-        if (activeItem.isItem)
-        {
-            useButtonText.text = "Use";
+        for (int i = 0; i < itemMenuPersonagemNome.Length; i++){
+            itemMenuPersonagemNome[i].text = GameManager.instance.playerStats[i].nomePersonagem;
+            itemMenuPersonagemNome[i].transform.parent.gameObject.SetActive(
+                GameManager.instance.playerStats[i].gameObject.activeInHierarchy);
         }
-
-        if (activeItem.isWeapon || activeItem.isArmour)
-        {
-            useButtonText.text = "Equip";
-        }
-
-        itemName.text = activeItem.itemName;
-        itemDescription.text = activeItem.description;
     }
-    */
-    /*
-     public void DiscardItem()
-     {
-         if (activeItem != null)
-         {
-             GameManager.instance.RemoveItem(activeItem.itemName);
-         }
-     }
-    */
+
+    public void FechandoPersonagemItem(){
+        itemMenuPersonagem.SetActive(false);
+    }
+
+    public void UsarItem(){
+        if (ativaItem != null){
+
+
+        }else{
+            itemNome.text = "Item Indisponível";
+            itemDescricao.text = "";
+        }
+    }
+  
     /*
     public void OpenItemCharChoice()
     {
