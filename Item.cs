@@ -28,5 +28,42 @@ public class Item : MonoBehaviour {
 	void Update () {
 		
 	}
-    
+
+    public void CarragaInformacoesDoItem(int use) {
+        StatusPersonagens personagemSelecionado = GameManager.instance.playerStats[use];
+        if (isItem) {
+            if (affectHP) {
+                personagemSelecionado.hpAtual += amountTochange;
+                if (personagemSelecionado.hpAtual > personagemSelecionado.hpMaximo) {
+                    personagemSelecionado.hpAtual = personagemSelecionado.hpMaximo;
+                }
+            }
+            if (affectMP){
+                personagemSelecionado.mpAtual += amountTochange;
+                if (personagemSelecionado.mpAtual > personagemSelecionado.mpMaximo){
+                    personagemSelecionado.mpAtual = personagemSelecionado.mpMaximo;
+                }
+            }
+            if (affectStr){
+                personagemSelecionado.forca += amountTochange;                                
+            }
+        }
+
+        if (isWeapon){
+            if (personagemSelecionado.armaEquipada != "") {
+                GameManager.instance.AdicionaItemInventario(personagemSelecionado.armaEquipada);
+            }
+            personagemSelecionado.armaEquipada = itemName;
+            personagemSelecionado.forcaArma = weaponStrength;            
+        }
+
+        if (isArmour){
+            if (personagemSelecionado.armaEquipada != ""){
+                GameManager.instance.AdicionaItemInventario(personagemSelecionado.armaduraEquipada);
+            }
+            personagemSelecionado.armaduraEquipada = itemName;
+            personagemSelecionado.forcaArmadura = armorStrength;
+        }
+        GameManager.instance.RemoveItemInventario(itemName);
+    }    
 }

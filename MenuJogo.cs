@@ -28,7 +28,10 @@ public class MenuJogo : MonoBehaviour {
     public static MenuJogo instance;
 
     public GameObject itemMenuPersonagem;
-    public Text[] itemMenuPersonagemNome;   
+    public Text[] itemMenuPersonagemNome;
+
+    public GameObject painelAcoes;
+
     //public static MenuJogo instance;
     //public Text ouroTexto;
     //public string mainMenuName;
@@ -179,55 +182,29 @@ public class MenuJogo : MonoBehaviour {
         }
     }
 
-    public void AbrindoPersonagemItem(){
+    public void AbrindoPersonagemDoItem(){
         itemMenuPersonagem.SetActive(true);
+        painelAcoes.SetActive(false);
 
         for (int i = 0; i < itemMenuPersonagemNome.Length; i++){
             itemMenuPersonagemNome[i].text = GameManager.instance.playerStats[i].nomePersonagem;
             itemMenuPersonagemNome[i].transform.parent.gameObject.SetActive(
                 GameManager.instance.playerStats[i].gameObject.activeInHierarchy);
         }
-    }
+    } 
 
-    public void FechandoPersonagemItem(){
+    public void UsarItem(int personagem){
+        painelAcoes.SetActive(true);
         itemMenuPersonagem.SetActive(false);
-    }
-
-    public void UsarItem(){
         if (ativaItem != null){
-
-
+            ativaItem.CarragaInformacoesDoItem(personagem);                       
+            ativaItem = null;
         }else{
             itemNome.text = "Item Indisponível";
             itemDescricao.text = "";
-        }
+        }       
     }
   
-    /*
-    public void OpenItemCharChoice()
-    {
-        itemMenuPersonagem.SetActive(true);
-
-        for (int i = 0; i < itemCharChoiceNames.Length; i++)
-        {
-            itemCharChoiceNames[i].text = GameManager.instance.playerStats[i].charName;
-            itemCharChoiceNames[i].transform.parent.gameObject.SetActive(GameManager.instance.playerStats[i].gameObject.activeInHierarchy);
-        }
-    }
-    */
-    /*
-    public void CloseItemCharChoice()
-    {
-        itemMenuPersonagem.SetActive(false);
-    }
-    */
-    /*
-    public void UseItem(int selectChar)
-    {
-        activeItem.Use(selectChar);
-        CloseItemCharChoice();
-    }
-    */
     /*
     public void SaveGame()
     {
