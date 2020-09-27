@@ -26,7 +26,7 @@ public class ControleDialogo : MonoBehaviour{
                     if (linhaDialogoAtual >= linhasDialogo.Length){
                         caixaDialogo.SetActive(false);
                         GameManager.instance.dialogoEstaAtivo = false;
-                        AtivandoRosaly();
+                        //AtivandoRosaly();
                     } else{
                         VerificaNome();
                         textoDialogo.text = linhasDialogo[linhaDialogoAtual];                        
@@ -57,12 +57,12 @@ public class ControleDialogo : MonoBehaviour{
             linhaDialogoAtual++;
         }
     }
-
+    /*
     public void AtivandoRosaly() {
         MovimentoPrincesa.instance.AtivandoImagemRosaly();
         GameManager.instance.ativandoMenuRosaly();
     }
-
+    */
     /*
     public void ShouldActivateQuestEnd(string questName, bool markComplete){
         questToMark = questName;
